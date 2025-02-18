@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0wrfk63v6nsn"]
+
+[ext_resource type="Script" path="res://scripts/code/taskbar.gd" id="1_ubit8"]
+[ext_resource type="Theme" uid="uid://bfg15d0m0j3d6" path="res://scenes/themes/theme.tres" id="3_rvwof"]
+[ext_resource type="Shader" path="res://scripts/shaders/taskbar.gdshader" id="4_avwry"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tym8b"]
+shader = ExtResource("4_avwry")
+shader_parameter/mouse = Vector2(0, 0)
+shader_parameter/time = 535.455
+shader_parameter/speed2 = 0.0
+
+[node name="Taskbar" type="Node2D" node_paths=PackedStringArray("containerHome", "shaderTimer", "timePanel", "followPanel", "songPanel", "timeLabel", "followLabel", "songLabel")]
+script = ExtResource("1_ubit8")
+containerHome = NodePath("containers")
+shaderTimer = NodePath("shaderTime")
+timePanel = NodePath("containers/Panel")
+followPanel = NodePath("containers/Panel5")
+songPanel = NodePath("containers/Panel6")
+timeLabel = NodePath("containers/Panel/Time")
+followLabel = NodePath("containers/Panel5/LastFollow")
+songLabel = NodePath("containers/Panel6/Song")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tym8b")
+offset_top = 1030.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="containers" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="containers"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 1041.0
+offset_right = 72.0
+offset_bottom = 1069.0
+theme = ExtResource("3_rvwof")
+
+[node name="Time" type="RichTextLabel" parent="containers/Panel"]
+layout_mode = 0
+offset_right = 62.0
+offset_bottom = 28.0
+bbcode_enabled = true
+text = "[center][font_size=18]14:54[/font_size][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Panel5" type="Panel" parent="containers"]
+layout_direction = 2
+layout_mode = 0
+offset_left = 490.0
+offset_top = 1041.0
+offset_right = 836.0
+offset_bottom = 1069.0
+size_flags_horizontal = 2
+theme = ExtResource("3_rvwof")
+
+[node name="LastFollow" type="RichTextLabel" parent="containers/Panel5"]
+layout_mode = 0
+offset_right = 346.0
+offset_bottom = 28.0
+bbcode_enabled = true
+text = "[center][font_size=18]Last Follow : 01234567890123456789[/font_size][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Panel6" type="Panel" parent="containers"]
+layout_mode = 0
+offset_left = 861.0
+offset_top = 1041.0
+offset_right = 1207.0
+offset_bottom = 1069.0
+theme = ExtResource("3_rvwof")
+
+[node name="Song" type="RichTextLabel" parent="containers/Panel6"]
+layout_mode = 0
+offset_right = 346.0
+offset_bottom = 28.0
+bbcode_enabled = true
+text = "[center][font_size=18]Current Song : kdss [/font_size][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="statsFetch" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="TimeFetch" type="Timer" parent="."]
+autostart = true
+
+[node name="shaderTime" type="Timer" parent="."]
+wait_time = 21600.0
+autostart = true
+
+[connection signal="timeout" from="statsFetch" to="." method="_on_stats_fetch_timeout"]
+[connection signal="timeout" from="TimeFetch" to="." method="_on_time_fetch_timeout"]

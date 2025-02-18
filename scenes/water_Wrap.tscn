@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://emfoog70m1ob"]
+
+[ext_resource type="Script" path="res://scripts/code/water_Wrap.gd" id="1_2mxfv"]
+[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="2_ndjx2"]
+[ext_resource type="PackedScene" uid="uid://cyhl65fei3bnf" path="res://scenes/water.tscn" id="2_qn2nl"]
+[ext_resource type="PackedScene" uid="uid://b58ps1ey23yg6" path="res://scenes/Joel.tscn" id="3_0brqm"]
+
+[sub_resource type="Curve2D" id="Curve2D_ls1ii"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_er3ys"]
+shader = ExtResource("2_ndjx2")
+shader_parameter/water_color = Color(0, 0.346849, 0.737488, 1)
+shader_parameter/water_transparency = 0.86
+
+[node name="WaterWrap" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_2mxfv")
+waterNode = ExtResource("2_qn2nl")
+JoelNode = ExtResource("3_0brqm")
+timer = NodePath("Timer")
+waterHeight = 985
+
+[node name="Joels" type="Node2D" parent="."]
+
+[node name="water" type="Node2D" parent="."]
+
+[node name="waterLine" type="Path2D" parent="."]
+visible = false
+curve = SubResource("Curve2D_ls1ii")
+
+[node name="waterTop" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.351388, 0.573236, 0.857891, 1)
+
+[node name="waterBody" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_er3ys")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

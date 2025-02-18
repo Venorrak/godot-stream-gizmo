@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyhl65fei3bnf"]
+
+[ext_resource type="Script" path="res://scripts/code/waterSim.gd" id="1_0a2wt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3nsx"]
+size = Vector2(20, 10)
+
+[node name="Water" type="Node2D"]
+script = ExtResource("1_0a2wt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="collisionBody" type="Area2D" parent="Sprite2D"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/collisionBody"]
+shape = SubResource("RectangleShape2D_i3nsx")
+debug_color = Color(0, 0.531459, 0.98738, 0.909804)
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)
+
+[connection signal="area_entered" from="Sprite2D/collisionBody" to="." method="_on_collision_body_area_entered"]
+[connection signal="body_entered" from="Sprite2D/collisionBody" to="." method="_on_collision_body_body_entered"]

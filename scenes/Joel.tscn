@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://b58ps1ey23yg6"]
+
+[ext_resource type="Script" path="res://scripts/code/Joel.gd" id="1_ssp44"]
+[ext_resource type="Texture2D" uid="uid://cm3nhyf4iv8au" path="res://resources/JoelNoBack.png" id="2_e7urr"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_s3q5v"]
+
+[node name="RigidBody2D" type="RigidBody2D" node_paths=PackedStringArray("emoteSprite")]
+mass = 0.01
+can_sleep = false
+script = ExtResource("1_ssp44")
+emoteSprite = NodePath("Sprite2D2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(-168, 2, -152, -9, -122, -19, -93, -24, -52, -25, -10, -26, 13, -24, 33, -20, 52, -19, 83, -30, 86, -29, 86, -20, 98, -10, 118, -10, 125, -13, 162, -37, 162, -31, 152, -5, 151, 1, 160, 16, 149, 15, 131, 7, 127, 0, 92, 0, 87, 4, 83, 10, 98, 17, 96, 19, 81, 21, 64, 18, 31, 18, 29, 20, 30, 24, 32, 31, 29, 32, 18, 28, 9, 21, -56, 23, -92, 16, -113, 17, -138, 10, -157, 9, -160, 14)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(122, -2)
+rotation = 3.14159
+texture = SubResource("ImageTexture_s3q5v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_e7urr")
+
+[node name="deathTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]

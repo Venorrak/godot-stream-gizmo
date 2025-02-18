@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://m2mfr2fdlldl"]
+
+[ext_resource type="Script" path="res://scripts/code/overlay.gd" id="1_l7h6h"]
+[ext_resource type="PackedScene" uid="uid://d2d3rhfm2e2hs" path="res://scenes/window_types/tool_menu_window.tscn" id="2_l01or"]
+[ext_resource type="PackedScene" uid="uid://c3464rjd3hxek" path="res://scenes/view_window.tscn" id="2_ljusv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ok0nr"]
+size = Vector2(1962, 136)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yt7gd"]
+size = Vector2(181, 1373)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwnes"]
+size = Vector2(2256, 153)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmkhm"]
+size = Vector2(159, 1216)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_udl7m"]
+radius = 450.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yyx0o"]
+radius = 75.0
+
+[node name="Node" type="Node" node_paths=PackedStringArray("sceneRoot", "killArea")]
+script = ExtResource("1_l7h6h")
+spawnedOnStart = Array[PackedScene]([ExtResource("2_l01or")])
+view_window = ExtResource("2_ljusv")
+sceneRoot = NodePath("Node2D")
+killArea = NodePath("Node2D/kill")
+attractionSpeed = 100.0
+
+[node name="Node2D" type="Node2D" parent="."]
+visibility_layer = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
+position = Vector2(10, -10)
+collision_layer = 6
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+position = Vector2(950, -58)
+shape = SubResource("RectangleShape2D_ok0nr")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Node2D"]
+position = Vector2(-10, 10)
+collision_layer = 6
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D2"]
+position = Vector2(-80.5, 537.5)
+shape = SubResource("RectangleShape2D_yt7gd")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Node2D"]
+position = Vector2(10, 1090)
+collision_layer = 6
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D3"]
+position = Vector2(938, 66.5)
+shape = SubResource("RectangleShape2D_qwnes")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Node2D"]
+position = Vector2(1930, 10)
+collision_layer = 6
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D4"]
+position = Vector2(69.5, 462)
+shape = SubResource("RectangleShape2D_bmkhm")
+
+[node name="attract" type="Area2D" parent="Node2D"]
+position = Vector2(1920, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/attract"]
+shape = SubResource("CircleShape2D_udl7m")
+
+[node name="kill" type="Area2D" parent="Node2D"]
+position = Vector2(1920, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/kill"]
+shape = SubResource("CircleShape2D_yyx0o")
+
+[connection signal="body_entered" from="Node2D/attract" to="." method="_on_attract_body_entered"]
+[connection signal="body_exited" from="Node2D/attract" to="." method="_on_attract_body_exited"]
+[connection signal="body_entered" from="Node2D/kill" to="." method="_on_kill_body_entered"]

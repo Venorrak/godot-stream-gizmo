@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://ceolmrc7f61cb"]
+
+[ext_resource type="PackedScene" uid="uid://bqhmt6k7s7i06" path="res://scenes/window_object_wrapper.tscn" id="1_yqxl3"]
+[ext_resource type="Script" path="res://scripts/code/get_window_specs.gd" id="2_4e1s1"]
+[ext_resource type="Script" path="res://scripts/code/chat_message.gd" id="3_bcvci"]
+[ext_resource type="AudioStream" uid="uid://0wfihxv8rka6" path="res://sounds/message2.mp3" id="4_nwvw8"]
+[ext_resource type="AudioStream" uid="uid://gl7bp4adxjiu" path="res://sounds/yay.mp3" id="5_xa7x0"]
+[ext_resource type="AudioStream" uid="uid://svyc8o0x2e01" path="res://sounds/raid.mp3" id="6_er63x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_soxdc"]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 1.0
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.909804)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.498039)
+shadow_offset = Vector2(0.495, 0.665)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wwsiv"]
+grow_begin = 0.0
+grow_end = -1.0
+
+[node name="RigidBody2D" node_paths=PackedStringArray("contentRef") instance=ExtResource("1_yqxl3")]
+collision_layer = 2
+collision_mask = 4
+contentRef = NodePath("Node2D/PanelContainer")
+
+[node name="Node2D" type="Node2D" parent="." index="1"]
+script = ExtResource("2_4e1s1")
+
+[node name="PanelContainer" type="PanelContainer" parent="Node2D" index="0" node_paths=PackedStringArray("http", "nameLabel", "messageLabel", "glowTimer")]
+offset_right = 250.0
+offset_bottom = 56.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_soxdc")
+script = ExtResource("3_bcvci")
+glowSpeed = 0.7
+http = NodePath("HTTPRequest")
+nameLabel = NodePath("VBoxContainer/username")
+messageLabel = NodePath("VBoxContainer/message")
+glowTimer = NodePath("glow")
+messageSound = ExtResource("4_nwvw8")
+notifSound = ExtResource("5_xa7x0")
+subscribeSound = ExtResource("5_xa7x0")
+raidSound = ExtResource("6_er63x")
+cheerSound = ExtResource("5_xa7x0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/PanelContainer" index="0"]
+layout_mode = 2
+
+[node name="username" type="RichTextLabel" parent="Node2D/PanelContainer/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HSeparator" type="HSeparator" parent="Node2D/PanelContainer/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_constants/separation = -4
+theme_override_styles/separator = SubResource("StyleBoxLine_wwsiv")
+
+[node name="message" type="RichTextLabel" parent="Node2D/PanelContainer/VBoxContainer" index="2"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Node2D/PanelContainer" index="1"]
+
+[node name="glow" type="Timer" parent="Node2D/PanelContainer" index="2"]
+
+[connection signal="minimum_size_changed" from="Node2D/PanelContainer" to="Node2D/PanelContainer" method="_on_minimum_size_changed"]

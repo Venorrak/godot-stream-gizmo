@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://mq214l2crrq7"]
+
+[ext_resource type="Script" path="res://scripts/code/chat_message.gd" id="1_psqbd"]
+[ext_resource type="StyleBox" uid="uid://cb2lhastxodrm" path="res://scenes/themes/panel.tres" id="2_7o201"]
+[ext_resource type="AudioStream" uid="uid://0wfihxv8rka6" path="res://sounds/message2.mp3" id="2_ws35i"]
+[ext_resource type="AudioStream" uid="uid://gl7bp4adxjiu" path="res://sounds/yay.mp3" id="3_5ycyf"]
+[ext_resource type="StyleBox" uid="uid://c3cvylxu1is7l" path="res://scenes/themes/line.tres" id="3_mkvms"]
+[ext_resource type="AudioStream" uid="uid://svyc8o0x2e01" path="res://sounds/raid.mp3" id="4_06lk0"]
+
+[sub_resource type="Animation" id="Animation_ii05v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4q5pa"]
+resource_name = "enterScene"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.183011, 1),
+"update": 0,
+"values": [Vector2(10, 0), Vector2(-325, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"makeSound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rdopd"]
+_data = {
+"RESET": SubResource("Animation_ii05v"),
+"enterScene": SubResource("Animation_4q5pa")
+}
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("http", "nameLabel", "messageLabel", "glowTimer")]
+script = ExtResource("1_psqbd")
+glowSpeed = 0.7
+http = NodePath("HTTPRequest")
+nameLabel = NodePath("Panel/Name")
+messageLabel = NodePath("Panel/message")
+glowTimer = NodePath("glow")
+messageSound = ExtResource("2_ws35i")
+notifSound = ExtResource("3_5ycyf")
+subscribeSound = ExtResource("3_5ycyf")
+raidSound = ExtResource("4_06lk0")
+cheerSound = ExtResource("3_5ycyf")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 10.0
+offset_right = 335.0
+offset_bottom = 47.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("2_7o201")
+
+[node name="Name" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 27.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Separator" type="HSeparator" parent="Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 27.0
+offset_right = 316.0
+offset_bottom = 31.0
+theme_override_styles/separator = ExtResource("3_mkvms")
+
+[node name="message" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_top = 31.0
+offset_right = 640.0
+offset_bottom = 63.0
+scale = Vector2(0.5, 0.5)
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="glow" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rdopd")
+}
+
+[connection signal="timeout" from="glow" to="." method="_on_glow_timeout"]

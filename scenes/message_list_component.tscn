@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://x5vgkg81b0kl"]
+
+[ext_resource type="Script" path="res://scripts/code/message_list_component.gd" id="1_ru8yn"]
+
+[node name="message" type="HBoxContainer" node_paths=PackedStringArray("usernameLabel", "messageLabel")]
+script = ExtResource("1_ru8yn")
+usernameLabel = NodePath("Label")
+messageLabel = NodePath("Label2")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+clip_text = true
+
+[node name="Label2" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "spawn"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

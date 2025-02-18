@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://cgnxjvxji7jls"]
+
+[ext_resource type="Script" path="res://scripts/code/tv_movement.gd" id="1_3ebay"]
+[ext_resource type="ArrayMesh" uid="uid://c625f2ode54o5" path="res://resources/tv2_pas_de_truc_rond.res" id="1_ecunv"]
+[ext_resource type="PackedScene" uid="uid://qcprw7il6mp0" path="res://scenes/equaliser.tscn" id="2_kiiix"]
+[ext_resource type="Shader" path="res://scripts/shaders/face.gdshader" id="2_mr8lh"]
+[ext_resource type="Script" path="res://scripts/code/movementSocket.gd" id="2_rd6op"]
+[ext_resource type="Script" path="res://scripts/code/eventSocket.gd" id="2_v2ksv"]
+[ext_resource type="PackedScene" uid="uid://dahtbwq3re7dw" path="res://scenes/bouce.tscn" id="3_vfdoo"]
+[ext_resource type="PackedScene" uid="uid://d4iuxhlbcxtqh" path="res://scenes/stand_by.tscn" id="4_lmftn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qvrh6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3cyvw"]
+viewport_path = NodePath("display/SubViewport")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hqlw4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo2i2"]
+shader = ExtResource("2_mr8lh")
+
+[node name="Tv" type="RigidBody3D" node_paths=PackedStringArray("starting_screen", "brb_screen", "left_eye", "right_eye")]
+mass = 0.001
+gravity_scale = 0.0
+sleeping = true
+freeze = true
+script = ExtResource("1_3ebay")
+rotationSpeed = 0.1
+starting_screen = NodePath("display/SubViewport/starting")
+brb_screen = NodePath("display/SubViewport/brb")
+left_eye = NodePath("display/SubViewport/leftEye")
+right_eye = NodePath("display/SubViewport/rightEye")
+
+[node name="eventSocket" type="Node" parent="." node_paths=PackedStringArray("head", "leftEye", "rightEye", "mouth", "brb", "starting")]
+script = ExtResource("2_v2ksv")
+head = NodePath("..")
+leftEye = NodePath("../display/SubViewport/leftEye")
+rightEye = NodePath("../display/SubViewport/rightEye")
+mouth = NodePath("../display/SubViewport/equaliser")
+brb = NodePath("../display/SubViewport/brb")
+starting = NodePath("../display/SubViewport/starting")
+
+[node name="movementSocket" type="Node" parent="."]
+script = ExtResource("2_rd6op")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qvrh6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 0.75, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("1_ecunv")
+skeleton = NodePath("")
+
+[node name="face" type="Sprite3D" parent="."]
+transform = Transform3D(-6.11959e-09, 0, 0.14, 0, 0.14, 0, -0.14, 0, -6.11959e-09, 0.81, 0, 0)
+transparent = false
+texture = SubResource("ViewportTexture_3cyvw")
+
+[node name="display" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="display"]
+process_mode = 1
+transparent_bg = true
+size = Vector2i(1280, 960)
+render_target_update_mode = 4
+
+[node name="rightEye" type="MeshInstance2D" parent="display/SubViewport"]
+modulate = Color(0.305882, 0.435294, 1, 1)
+position = Vector2(880, 220)
+scale = Vector2(126.781, 198.195)
+mesh = SubResource("SphereMesh_hqlw4")
+
+[node name="leftEye" type="MeshInstance2D" parent="display/SubViewport"]
+modulate = Color(0.305882, 0.435294, 1, 1)
+position = Vector2(400, 220)
+scale = Vector2(126.781, 198.195)
+mesh = SubResource("SphereMesh_hqlw4")
+
+[node name="equaliser" parent="display/SubViewport" instance=ExtResource("2_kiiix")]
+
+[node name="brb" parent="display/SubViewport" instance=ExtResource("3_vfdoo")]
+visible = false
+position = Vector2(0, 93.57)
+scale = Vector2(1.12, 1.175)
+
+[node name="starting" parent="display/SubViewport" instance=ExtResource("4_lmftn")]
+visible = false
+scale = Vector2(1.11, 1.495)
+
+[node name="crtShader" type="ColorRect" parent="display/SubViewport"]
+material = SubResource("ShaderMaterial_oo2i2")
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(33.877, 24.154)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="display"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.813, 0, 0)
+light_color = Color(0.47451, 0.537255, 0.643137, 1)
+light_energy = 6.01
+light_size = 0.111
+spot_range = 2.7
+spot_attenuation = 1.27
+spot_angle = 89.0
+spot_angle_attenuation = 0.129

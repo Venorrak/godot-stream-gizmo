@@ -1,0 +1,382 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4iuxhlbcxtqh"]
+
+[ext_resource type="Script" path="res://scripts/code/starting_anim.gd" id="1_vtacv"]
+
+[sub_resource type="Animation" id="Animation_kbrab"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("layer_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("layer_2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("layer_3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_afk5v"]
+resource_name = "test"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("layer_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1152, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("layer_2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1152, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("layer_3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10.1, 20),
+"transitions": PackedFloat32Array(-5.27803, -5.3, 0.08),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1152, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aylsl"]
+_data = {
+"RESET": SubResource("Animation_kbrab"),
+"test": SubResource("Animation_afk5v")
+}
+
+[sub_resource type="Theme" id="Theme_ys57e"]
+RichTextLabel/font_sizes/normal_font_size = 31
+
+[node name="StandBy" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aylsl")
+}
+script = ExtResource("1_vtacv")
+
+[node name="layer_1" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="layer_1"]
+offset_right = 160.0
+offset_bottom = 416.0
+
+[node name="ColorRect2" type="ColorRect" parent="layer_1"]
+offset_left = 160.0
+offset_right = 320.0
+offset_bottom = 416.0
+color = Color(0.976986, 0.974425, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="layer_1"]
+offset_left = 320.0
+offset_right = 480.0
+offset_bottom = 416.0
+color = Color(0.36189, 0.69516, 1, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="layer_1"]
+offset_left = 480.0
+offset_right = 648.0
+offset_bottom = 416.0
+color = Color(0, 0.767728, 0.122798, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="layer_1"]
+offset_left = 648.0
+offset_right = 816.0
+offset_bottom = 416.0
+color = Color(0.873399, 0.000242964, 0.779382, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="layer_1"]
+offset_left = 816.0
+offset_right = 984.0
+offset_bottom = 416.0
+color = Color(1, 0.153857, 0.0806225, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="layer_1"]
+offset_left = 984.0
+offset_right = 1152.0
+offset_bottom = 416.0
+color = Color(0.227459, 0.330524, 1, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="layer_1"]
+offset_left = 1152.0
+offset_right = 1312.0
+offset_bottom = 416.0
+
+[node name="ColorRect9" type="ColorRect" parent="layer_1"]
+offset_left = 1312.0
+offset_right = 1472.0
+offset_bottom = 416.0
+color = Color(0.976986, 0.974425, 0, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="layer_1"]
+offset_left = 1472.0
+offset_right = 1632.0
+offset_bottom = 416.0
+color = Color(0.36189, 0.69516, 1, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="layer_1"]
+offset_left = 1632.0
+offset_right = 1800.0
+offset_bottom = 416.0
+color = Color(0, 0.767728, 0.122798, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="layer_1"]
+offset_left = 1800.0
+offset_right = 1968.0
+offset_bottom = 416.0
+color = Color(0.873399, 0.000242964, 0.779382, 1)
+
+[node name="ColorRect13" type="ColorRect" parent="layer_1"]
+offset_left = 1968.0
+offset_right = 2136.0
+offset_bottom = 416.0
+color = Color(1, 0.153857, 0.0806225, 1)
+
+[node name="ColorRect14" type="ColorRect" parent="layer_1"]
+offset_left = 2136.0
+offset_right = 2304.0
+offset_bottom = 416.0
+color = Color(0.227459, 0.330524, 1, 1)
+
+[node name="layer_2" type="Node2D" parent="."]
+
+[node name="ColorRect8" type="ColorRect" parent="layer_2"]
+offset_top = 416.0
+offset_right = 160.0
+offset_bottom = 464.0
+color = Color(0.427215, 0.348564, 1, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="layer_2"]
+offset_left = 160.0
+offset_top = 416.0
+offset_right = 320.0
+offset_bottom = 464.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect10" type="ColorRect" parent="layer_2"]
+offset_left = 320.0
+offset_top = 416.0
+offset_right = 480.0
+offset_bottom = 464.0
+color = Color(0.786053, 0.000244697, 0.721837, 1)
+
+[node name="ColorRect11" type="ColorRect" parent="layer_2"]
+offset_left = 480.0
+offset_top = 416.0
+offset_right = 648.0
+offset_bottom = 464.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect12" type="ColorRect" parent="layer_2"]
+offset_left = 648.0
+offset_top = 416.0
+offset_right = 816.0
+offset_bottom = 464.0
+color = Color(5.29438e-06, 0.632851, 0.850603, 1)
+
+[node name="ColorRect13" type="ColorRect" parent="layer_2"]
+offset_left = 816.0
+offset_top = 416.0
+offset_right = 984.0
+offset_bottom = 464.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect14" type="ColorRect" parent="layer_2"]
+offset_left = 984.0
+offset_top = 416.0
+offset_right = 1152.0
+offset_bottom = 464.0
+
+[node name="ColorRect15" type="ColorRect" parent="layer_2"]
+offset_left = -1152.0
+offset_top = 416.0
+offset_right = -992.0
+offset_bottom = 464.0
+color = Color(0.427215, 0.348564, 1, 1)
+
+[node name="ColorRect16" type="ColorRect" parent="layer_2"]
+offset_left = -992.0
+offset_top = 416.0
+offset_right = -832.0
+offset_bottom = 464.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect17" type="ColorRect" parent="layer_2"]
+offset_left = -832.0
+offset_top = 416.0
+offset_right = -672.0
+offset_bottom = 464.0
+color = Color(0.786053, 0.000244697, 0.721837, 1)
+
+[node name="ColorRect18" type="ColorRect" parent="layer_2"]
+offset_left = -672.0
+offset_top = 416.0
+offset_right = -504.0
+offset_bottom = 464.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect19" type="ColorRect" parent="layer_2"]
+offset_left = -504.0
+offset_top = 416.0
+offset_right = -336.0
+offset_bottom = 464.0
+color = Color(5.29438e-06, 0.632851, 0.850603, 1)
+
+[node name="ColorRect20" type="ColorRect" parent="layer_2"]
+offset_left = -336.0
+offset_top = 416.0
+offset_right = -168.0
+offset_bottom = 464.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect21" type="ColorRect" parent="layer_2"]
+offset_left = -168.0
+offset_top = 416.0
+offset_bottom = 464.0
+
+[node name="layer_3" type="Node2D" parent="."]
+
+[node name="ColorRect15" type="ColorRect" parent="layer_3"]
+offset_top = 464.0
+offset_right = 192.0
+offset_bottom = 648.0
+color = Color(0, 0.272625, 0.503458, 1)
+
+[node name="ColorRect16" type="ColorRect" parent="layer_3"]
+offset_left = 192.0
+offset_top = 464.0
+offset_right = 384.0
+offset_bottom = 648.0
+
+[node name="ColorRect17" type="ColorRect" parent="layer_3"]
+offset_left = 384.0
+offset_top = 464.0
+offset_right = 576.0
+offset_bottom = 648.0
+color = Color(0.592052, 0.00158177, 0.770674, 1)
+
+[node name="ColorRect18" type="ColorRect" parent="layer_3"]
+offset_left = 576.0
+offset_top = 464.0
+offset_right = 768.0
+offset_bottom = 648.0
+color = Color(0.826502, 0.518728, 0, 1)
+
+[node name="ColorRect19" type="ColorRect" parent="layer_3"]
+offset_left = 768.0
+offset_top = 464.0
+offset_right = 960.0
+offset_bottom = 648.0
+
+[node name="ColorRect20" type="ColorRect" parent="layer_3"]
+offset_left = 960.0
+offset_top = 464.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[node name="ColorRect21" type="ColorRect" parent="layer_3"]
+offset_left = 1152.0
+offset_top = 464.0
+offset_right = 1344.0
+offset_bottom = 648.0
+color = Color(0, 0.272625, 0.503458, 1)
+
+[node name="ColorRect22" type="ColorRect" parent="layer_3"]
+offset_left = 1344.0
+offset_top = 464.0
+offset_right = 1536.0
+offset_bottom = 648.0
+
+[node name="ColorRect23" type="ColorRect" parent="layer_3"]
+offset_left = 1536.0
+offset_top = 464.0
+offset_right = 1728.0
+offset_bottom = 648.0
+color = Color(0.592052, 0.00158177, 0.770674, 1)
+
+[node name="ColorRect24" type="ColorRect" parent="layer_3"]
+offset_left = 1728.0
+offset_top = 464.0
+offset_right = 1920.0
+offset_bottom = 648.0
+color = Color(0.826502, 0.518728, 0, 1)
+
+[node name="ColorRect25" type="ColorRect" parent="layer_3"]
+offset_left = 1920.0
+offset_top = 464.0
+offset_right = 2112.0
+offset_bottom = 648.0
+
+[node name="ColorRect26" type="ColorRect" parent="layer_3"]
+offset_left = 2112.0
+offset_top = 464.0
+offset_right = 2304.0
+offset_bottom = 648.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[node name="ColorRect21" type="ColorRect" parent="."]
+offset_left = 320.0
+offset_top = 200.0
+offset_right = 816.0
+offset_bottom = 296.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect21"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -248.0
+offset_right = 248.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme = SubResource("Theme_ys57e")
+bbcode_enabled = true
+text = "[center][b][font_size=40][wave amp=50.0 freq=3.0 connected=1]Stand By[/wave][/font_size][/b][/center]
+[center][b][font_size=20][pulse freq=1.0 color=#ffffff10 ease=-2.0]Starting soon :)[/pulse][/font_size][/b][/center]"
+scroll_active = false

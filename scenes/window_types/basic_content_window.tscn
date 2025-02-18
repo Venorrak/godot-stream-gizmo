@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://2pdue4yw41do"]
+
+[ext_resource type="PackedScene" uid="uid://bqhmt6k7s7i06" path="res://scenes/window_object_wrapper.tscn" id="1_t8ubp"]
+[ext_resource type="Script" path="res://scripts/code/get_window_specs.gd" id="2_d8tnk"]
+[ext_resource type="Script" path="res://scripts/code/basic_content_window.gd" id="3_uvasf"]
+
+[node name="RigidBody2D" node_paths=PackedStringArray("contentRef") instance=ExtResource("1_t8ubp")]
+collision_layer = 2
+collision_mask = 4
+contentRef = NodePath("Node2D/Node2D")
+
+[node name="Node2D" type="Node2D" parent="." index="1"]
+script = ExtResource("2_d8tnk")
+
+[node name="Node2D" type="Node2D" parent="Node2D" index="0"]
+script = ExtResource("3_uvasf")
+maxWidthImage = 720
+maxHeightImage = 480
+
+[connection signal="child_entered_tree" from="Node2D/Node2D" to="Node2D/Node2D" method="_on_child_entered_tree"]
