@@ -1,17 +1,20 @@
 extends PanelContainer
 
-@export var noteContent : LineEdit
+@export var noteContent : TextEdit
 @export var imageLink : LineEdit
+@export var videoLink : LineEdit
 @export var animSelect : OptionButton
 @export var messageList : VBoxContainer
 @export var contentWindowScene : PackedScene
-@export var http : HTTPRequest
+@export var httpImage : HTTPRequest
+@export var httpVideo : HTTPRequest
 
 func _ready() -> void:
 	SignalBus.connect("createNewMessageListComponent", newMessageInList)
-	http.request_completed.connect(_on_request_completed)
+	httpImage.request_completed.connect(_on_request_completed_image)
+	httpVideo.request_completed.connect(_on_request_completed_video)
 
-func _on_request_completed(result, response_code, headers, body) -> void:
+func _on_request_completed_image(result, response_code, headers, body) -> void:
 	print(response_code)
 	if response_code == 200:
 		var img = Image.new()
@@ -21,6 +24,17 @@ func _on_request_completed(result, response_code, headers, body) -> void:
 		if validateImage(err, img): return
 		err = img.load_webp_from_buffer(body)
 		if validateImage(err, img): return
+
+func _on_request_completed_video(result, response_code, headers, body) -> void:
+	if response_code == 200:
+		var newNote = contentWindowScene.instantiate()
+		newNote.setContent(
+			{
+				"type": "video",
+				"content": httpVideo.download_file
+			}
+		)
+		SignalBus.createOverlayElement.emit(newNote, true, Vector2(0, 0))
 
 func validateImage(error : Error, image : Image) -> bool:
 	if error == OK:
@@ -57,7 +71,7 @@ func _on_note_button_pressed() -> void:
 
 func _on_image_button_pressed() -> void:
 	if imageLink.text.is_empty(): return
-	http.request(imageLink.text)
+	httpImage.request(imageLink.text)
 
 func _on_clear_windows_pressed() -> void:
 	SignalBus.clearOverlayElements.emit()
@@ -73,3 +87,7 @@ func _on_face_color_color_changed(color: Color) -> void:
 
 func _on_minimum_size_changed() -> void:
 	get_parent().updateSpecs()
+
+func _on_video_pressed() -> void:
+	if videoLink.text.is_empty(): return
+	httpVideo.request(videoLink.text)

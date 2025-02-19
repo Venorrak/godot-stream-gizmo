@@ -18,7 +18,15 @@ func setContent(content : Dictionary) -> void:
 			newImage.texture = content["content"]
 			add_child(newImage)
 		"video":
-			pass
+			var newContainer : PanelContainer = PanelContainer.new()
+			var newVideoPlayer : VideoStreamPlayer = VideoStreamPlayer.new()
+			var newFFMPEG : FFmpegVideoStream = FFmpegVideoStream.new()
+			newFFMPEG.file = "temp.mp4"
+			newVideoPlayer.autoplay = true
+			newVideoPlayer.loop = true
+			newVideoPlayer.stream = newFFMPEG
+			add_child(newContainer)
+			newContainer.add_child(newVideoPlayer)
 		"text":
 			var newContainer : PanelContainer = PanelContainer.new()
 			var newLabel : Label = Label.new()
@@ -44,12 +52,19 @@ func _on_child_entered_tree(node: Node) -> void:
 				newScale = scaleToTargetWidth
 			else:
 				newScale = scaleToTargetHeight
-			print(scaleToTargetHeight)
-			print(scaleToTargetWidth)
 			get_child(0).scale = Vector2(newScale, newScale)
-			print(get_child(0).scale)
 			get_child(0).position += (size * newScale)/2
 			size *= newScale
 		"PanelContainer":
 			size = get_child(0).get_rect().size
+			if get_child(0).get_child(0).is_class("VideoStreamPlayer"):
+				var scaleToTargetWidth : float = maxWidthImage / size.x
+				var scaleToTargetHeight : float = maxHeightImage / size.y
+				var newScale : float = 1
+				if abs(1 - scaleToTargetWidth) < abs(1 - scaleToTargetHeight):
+					newScale = scaleToTargetWidth
+				else:
+					newScale = scaleToTargetHeight
+				get_child(0).scale = Vector2(newScale, newScale)
+				size *= newScale
 	get_parent().updateSpecs()

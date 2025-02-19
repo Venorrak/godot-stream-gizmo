@@ -56,6 +56,8 @@ func calculateVelocity() -> Vector2:
 	for vec in velocities:
 		force += vec.length()
 	# the last velocity chooses the direction and the force is the addition of all the vectors
+	if velocities.is_empty():
+		return Vector2.ZERO
 	return velocities[-1].normalized() * force 
 
 func amIOutOfBounds() -> void:
