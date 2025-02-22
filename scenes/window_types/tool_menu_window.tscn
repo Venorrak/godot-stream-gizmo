@@ -44,13 +44,14 @@ metadata/_tab_index = 0
 
 [node name="pas rien" type="TabContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer" index="2"]
 layout_mode = 2
-current_tab = 1
+current_tab = 2
 clip_tabs = false
 metadata/_tab_index = 1
 
 [node name="anim" type="OptionButton" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien" index="1"]
 visible = false
 layout_mode = 2
+button_mask = 3
 selected = 3
 allow_reselect = true
 item_count = 4
@@ -64,6 +65,7 @@ popup/item_3/id = 3
 metadata/_tab_index = 0
 
 [node name="create" type="VBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien" index="2"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -74,10 +76,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 placeholder_text = "link to image"
+context_menu_enabled = false
 clear_button_enabled = true
 
 [node name="imageButton" type="Button" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/image" index="1"]
 layout_mode = 2
+button_mask = 3
 text = "send"
 
 [node name="Video" type="HBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create" index="1"]
@@ -87,10 +91,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 placeholder_text = "link to video"
+context_menu_enabled = false
 clear_button_enabled = true
 
 [node name="video" type="Button" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/Video" index="1"]
 layout_mode = 2
+button_mask = 3
 text = "send"
 
 [node name="note" type="HBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create" index="2"]
@@ -100,34 +106,39 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "note"
+context_menu_enabled = false
 wrap_mode = 1
 scroll_fit_content_height = true
 
 [node name="noteButton" type="Button" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/note" index="1"]
 layout_mode = 2
+button_mask = 3
 text = "send"
 
 [node name="options" type="VBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien" index="3"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
 [node name="clearWindows" type="Button" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options" index="0"]
 layout_mode = 2
+button_mask = 3
 text = "Clear all windows"
 
 [node name="windowEnable" type="CheckButton" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options" index="1"]
 layout_mode = 2
 button_pressed = true
+button_mask = 3
 text = "windows can appear"
 
 [node name="JoelEmoteEnable" type="CheckButton" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options" index="2"]
 layout_mode = 2
 button_pressed = true
+button_mask = 3
 text = "Joel can appear"
 
 [node name="faceColor" type="ColorPickerButton" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options" index="3"]
 layout_mode = 2
+button_mask = 3
 text = "face color"
 color = Color(0.305882, 0.435294, 1, 1)
 edit_alpha = false
@@ -146,10 +157,12 @@ layout_mode = 2
 
 [node name="imageRequest" type="HTTPRequest" parent="Node2D/PanelContainer" index="1"]
 use_threads = true
+timeout = 10.0
 
 [node name="videoRequest" type="HTTPRequest" parent="Node2D/PanelContainer" index="2"]
 download_file = "res://temp.mp4"
 use_threads = true
+timeout = 10.0
 
 [connection signal="minimum_size_changed" from="Node2D/PanelContainer" to="Node2D/PanelContainer" method="_on_minimum_size_changed"]
 [connection signal="item_selected" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/anim" to="Node2D/PanelContainer" method="_on_anim_item_selected"]

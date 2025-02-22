@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxul5crkom1b0"]
+
+[ext_resource type="Script" path="res://scripts/code/media_request_list_component.gd" id="1_3jvl2"]
+[ext_resource type="PackedScene" uid="uid://2pdue4yw41do" path="res://scenes/window_types/basic_content_window.tscn" id="2_cgas5"]
+
+[node name="MediaRequestListComponent" type="HBoxContainer" node_paths=PackedStringArray("imageNode", "http")]
+script = ExtResource("1_3jvl2")
+imageNode = NodePath("TextureRect")
+http = NodePath("imageRequest")
+contentWindowScene = ExtResource("2_cgas5")
+
+[node name="imageRequest" type="HTTPRequest" parent="."]
+use_threads = true
+timeout = 10.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+expand_mode = 5
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+button_mask = 3
+text = "Spawn"
+
+[connection signal="request_completed" from="imageRequest" to="." method="_on_image_request_request_completed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

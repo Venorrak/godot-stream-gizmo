@@ -11,3 +11,4 @@ signal createOverlayElement #object, position(on screen)
 signal clearOverlayElements
 signal OverlayElementsEnabled #bool
 signal createNewMessageListComponent
+signal sendMessageToBus #Dict

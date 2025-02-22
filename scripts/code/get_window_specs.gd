@@ -16,6 +16,7 @@ func updateSpecs() -> void:
 	match self.get_class():
 		"Sprite2D":
 			size = self.texture.get_size()
+			size *= self.scale
 		"Node2D":
 			match get_child(0).get_class():
 				"PanelContainer":#recommend a panelContainer

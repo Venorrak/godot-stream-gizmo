@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4gtqgtcgvxty"]
+
+[ext_resource type="Script" path="res://scripts/code/chatHandler.gd" id="1_7b53u"]
+[ext_resource type="PackedScene" uid="uid://ceolmrc7f61cb" path="res://scenes/window_types/chat_message_window.tscn" id="2_72qoy"]
+[ext_resource type="PackedScene" uid="uid://x5vgkg81b0kl" path="res://scenes/message_list_component.tscn" id="3_yqajo"]
+[ext_resource type="PackedScene" uid="uid://cxul5crkom1b0" path="res://scenes/media_request_list_component.tscn" id="4_rv0q0"]
+[ext_resource type="PackedScene" uid="uid://deu8lygiu48s5" path="res://scenes/window_types/liveReaction.tscn" id="4_wvhrb"]
+
+[node name="ChatHandler" type="Node"]
+script = ExtResource("1_7b53u")
+messageScene = ExtResource("2_72qoy")
+messageListScene = ExtResource("3_yqajo")
+mediaRequestScene = ExtResource("4_rv0q0")
+liveReaction = ExtResource("4_wvhrb")

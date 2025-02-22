@@ -8,10 +8,10 @@ func getSize() -> Vector2:
 	return size
 
 func setContent(content : Dictionary) -> void:
-	{
-		"type": "image", # "video", "text"
-		"content": "allo"
-	}
+	#{
+		#"type": "image", # "video", "text"
+		#"content": "allo"
+	#}
 	match content["type"]:
 		"image":
 			var newImage : Sprite2D = Sprite2D.new()
