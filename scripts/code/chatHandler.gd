@@ -9,12 +9,14 @@ var messsages : Array = []
 
 var index : int = 0
 var CommandsRef : Dictionary = {
-	"!livereaction": createLiveReaction,
-	"!image": createMediaRequest,
-	"!command": sendCommandsToChat,
 	"!commands": sendCommandsToChat,
+	"!command": sendCommandsToChat,
 	"!c": sendCommandsToChat,
-	"!discord": sendDiscordToChat
+	"!discord": sendDiscordToChat,
+	
+	"!image": createMediaRequest,
+	"!livereaction": createLiveReaction,
+	"!emotes": sendEmoteList
 }
 
 func _ready() -> void:
@@ -79,5 +81,17 @@ func sendDiscordToChat(words: PackedStringArray) -> void:
 	var data : Dictionary = {
 		"action": "sendMessage",
 		"content": "You can see me talking on prod's discord server: https://discord.gg/JzPgeMp3EV or on Jake's discord server: https://discord.gg/MRjMmxQ6Wb"
+	}
+	SignalBus.sendMessageToBus.emit(data)
+
+func sendEmoteList(words : PackedStringArray) -> void:
+	var emotesList = DirAccess.get_files_at("7tv")
+	var newList : Array = []
+	for emote in emotesList:
+		if emote.get_extension() == 'png':
+			newList.append(emote.trim_suffix(".png"))
+	var data : Dictionary = {
+		"action": "sendMessage",
+		"content": str(newList)
 	}
 	SignalBus.sendMessageToBus.emit(data)

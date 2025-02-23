@@ -115,6 +115,7 @@ func _on_request_completed(result, response_code, headers, body) -> void:
 func onLoadFinished() -> void:
 	setNameLabelContent()
 	setMessageLabelContent()
+	makeSound()
 	rendered = true
 	
 func treatForNameLabel(name : String, color : Color) -> String:

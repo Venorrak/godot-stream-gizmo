@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://2pdue4yw41do" path="res://scenes/window_types/basic_content_window.tscn" id="5_uwxqw"]
 
 [node name="RigidBody2D" instance=ExtResource("1_lnmm3")]
+top_level = true
 collision_layer = 2
 collision_mask = 4
 
