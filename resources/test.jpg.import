@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm3nhyf4iv8au"
-path.s3tc="res://.godot/imported/JoelNoBack.png-fb8f15af27daa3e93acc3ecd6d77b3e3.s3tc.ctex"
+uid="uid://b8rj3djb1dfdh"
+path.s3tc="res://.godot/imported/test.jpg-c575067cd259c6a35df4a76d773e8dc5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resources/JoelNoBack.png"
-dest_files=["res://.godot/imported/JoelNoBack.png-fb8f15af27daa3e93acc3ecd6d77b3e3.s3tc.ctex"]
+source_file="res://resources/test.jpg"
+dest_files=["res://.godot/imported/test.jpg-c575067cd259c6a35df4a76d773e8dc5.s3tc.ctex"]
 
 [params]
 

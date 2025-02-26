@@ -13,7 +13,7 @@ config_version=5
 config/name="avatar"
 run/main_scene="res://scenes/scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-run/low_processor_mode=true
+run/max_fps=60
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -34,10 +34,16 @@ ChatHandler="*res://scenes/chatHandler.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
 window/size/borderless=true
 window/size/transparent=true
 window/subwindows/embed_subwindows=false
 window/per_pixel_transparency/allowed=true
+window/vsync/vsync_mode=2
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
 
 [global_group]
 
@@ -49,7 +55,10 @@ Clickables=""
 
 [rendering]
 
+rendering_device/vsync/frame_queue_size=3
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+driver/threads/thread_model=2
 environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 0)
+viewport/transparent_background=true

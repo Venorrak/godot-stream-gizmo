@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm3nhyf4iv8au"
-path.s3tc="res://.godot/imported/JoelNoBack.png-fb8f15af27daa3e93acc3ecd6d77b3e3.s3tc.ctex"
+uid="uid://w7rrmvrwoxr5"
+path="res://.godot/imported/floppy4.png-f944b606176e5e0da0d0acf68aba924b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/JoelNoBack.png"
-dest_files=["res://.godot/imported/JoelNoBack.png-fb8f15af27daa3e93acc3ecd6d77b3e3.s3tc.ctex"]
+source_file="res://resources/floppy4.png"
+dest_files=["res://.godot/imported/floppy4.png-f944b606176e5e0da0d0acf68aba924b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

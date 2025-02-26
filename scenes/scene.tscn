@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5j7yw3ufwl0u"]
+[gd_scene load_steps=39 format=3 uid="uid://b5j7yw3ufwl0u"]
 
 [ext_resource type="Script" path="res://scripts/code/scene.gd" id="1_f0oil"]
 [ext_resource type="PackedScene" uid="uid://cgnxjvxji7jls" path="res://scenes/Tv.tscn" id="2_5ybly"]
 [ext_resource type="PackedScene" uid="uid://emfoog70m1ob" path="res://scenes/water_Wrap.tscn" id="3_c2se5"]
+[ext_resource type="PackedScene" uid="uid://bcdudmycu7ark" path="res://scenes/floppy.tscn" id="3_l2rq4"]
 [ext_resource type="PackedScene" uid="uid://c0wrfk63v6nsn" path="res://scenes/taskbar.tscn" id="4_gr3jo"]
 [ext_resource type="PackedScene" uid="uid://m2mfr2fdlldl" path="res://scenes/overlay.tscn" id="5_m8pni"]
 
@@ -371,7 +372,7 @@ states/zoom_in/position = Vector2(472, 100)
 states/zoom_out/node = SubResource("AnimationNodeAnimation_stabw")
 states/zoom_out/position = Vector2(931, 200.563)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_lshn6"), "RESET", "End", SubResource("AnimationNodeStateMachineTransition_q6o1f"), "RESET", "zoom_in", SubResource("AnimationNodeStateMachineTransition_do3nd"), "zoom_in", "start_on", SubResource("AnimationNodeStateMachineTransition_58o5w"), "start_on", "start_off", SubResource("AnimationNodeStateMachineTransition_w4xdt"), "start_off", "start_on", SubResource("AnimationNodeStateMachineTransition_2xd0s"), "zoom_in", "brb_on", SubResource("AnimationNodeStateMachineTransition_pinrr"), "brb_on", "brb_off", SubResource("AnimationNodeStateMachineTransition_fhxat"), "brb_off", "brb_on", SubResource("AnimationNodeStateMachineTransition_smamh"), "brb_off", "zoom_out", SubResource("AnimationNodeStateMachineTransition_cm4u6"), "start_off", "zoom_out", SubResource("AnimationNodeStateMachineTransition_rspoo"), "zoom_in", "zoom_out", SubResource("AnimationNodeStateMachineTransition_3lwpb"), "zoom_out", "RESET", SubResource("AnimationNodeStateMachineTransition_arluj"), "start_off", "brb_on", SubResource("AnimationNodeStateMachineTransition_pmhuj"), "brb_off", "start_on", SubResource("AnimationNodeStateMachineTransition_4wyii")]
-graph_offset = Vector2(0, -53.4375)
+graph_offset = Vector2(129.159, -71.8806)
 
 [node name="Scene" type="Node3D" node_paths=PackedStringArray("head", "water")]
 script = ExtResource("1_f0oil")
@@ -381,7 +382,6 @@ water = NodePath("displayViewport/WaterWrap")
 [node name="ambiantLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.364877, -0.18403, 0.912687, 0, 0.980271, 0.197657, -0.931056, -0.0721206, 0.357678, 0, 0, 0)
 light_energy = 0.4
-shadow_enabled = true
 
 [node name="Tv" parent="." instance=ExtResource("2_5ybly")]
 transform = Transform3D(1.845, 0, 0, 0, 1.845, 0, 0, 0, 1.845, 2.555, -3.28, -7.17)
@@ -390,6 +390,9 @@ transform = Transform3D(1.845, 0, 0, 0, 1.845, 0, 0, 0, 1.845, 2.555, -3.28, -7.
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 texture_filter = 0
 texture = SubResource("ViewportTexture_0yrar")
+
+[node name="Floppy" parent="." instance=ExtResource("3_l2rq4")]
+transform = Transform3D(-1.267e-05, 0, 3.5, 0, 3.5, 0, -3.5, 0, -1.267e-05, 0, -10, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 21.97, 0, 0)
