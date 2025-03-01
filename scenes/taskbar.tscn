@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0wrfk63v6nsn"]
+[gd_scene load_steps=13 format=3 uid="uid://c0wrfk63v6nsn"]
 
 [ext_resource type="Script" path="res://scripts/code/taskbar.gd" id="1_ubit8"]
 [ext_resource type="Theme" uid="uid://bfg15d0m0j3d6" path="res://scenes/themes/theme.tres" id="3_rvwof"]
@@ -14,11 +14,49 @@ height = 50
 fill = 1
 fill_to = Vector2(1, 1)
 
-[node name="Taskbar" type="Node2D" node_paths=PackedStringArray("timeLabel", "followLabel", "songLabel")]
+[sub_resource type="SystemFont" id="SystemFont_8er0h"]
+font_names = PackedStringArray("Tepid Terminal")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_04s6y"]
+font_names = PackedStringArray("Tepid Terminal")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_krkpy"]
+font_names = PackedStringArray("Tepid Terminal")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lvh6"]
+bg_color = Color(0.886275, 0.886275, 0.886275, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Theme" id="Theme_2ol2w"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_0lvh6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8qys"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewe8d"]
+bg_color = Color(0, 0.629829, 0.979454, 1)
+
+[sub_resource type="Theme" id="Theme_fq88k"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_l8qys")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_ewe8d")
+
+[node name="Taskbar" type="Node2D" node_paths=PackedStringArray("timeLabel", "followLabel", "songLabel", "JCPChartParent", "http")]
 script = ExtResource("1_ubit8")
 timeLabel = NodePath("containers/HBoxContainer/PanelContainer/Time")
 followLabel = NodePath("containers/HBoxContainer/PanelContainer2/LastFollow")
 songLabel = NodePath("containers/HBoxContainer/PanelContainer3/Song")
+JCPChartParent = NodePath("containers/HBoxContainer/PanelContainer4/HBoxContainer2")
+http = NodePath("HTTPRequest")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_top = 1030.0
@@ -52,8 +90,9 @@ theme = ExtResource("3_rvwof")
 [node name="Time" type="RichTextLabel" parent="containers/HBoxContainer/PanelContainer"]
 clip_contents = false
 layout_mode = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_8er0h")
 bbcode_enabled = true
-text = "[center][font_size=18]14:54[/font_size][/center]"
+text = "[center][font_size=28]14:54[/font_size][/center]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -70,8 +109,9 @@ theme = ExtResource("3_rvwof")
 [node name="LastFollow" type="RichTextLabel" parent="containers/HBoxContainer/PanelContainer2"]
 clip_contents = false
 layout_mode = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_04s6y")
 bbcode_enabled = true
-text = "[center][font_size=18]Last Follow : 01234567890123456789[/font_size][/center]"
+text = "[center][font_size=28]Last Follow : 01234567890123456789[/font_size][/center]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -88,13 +128,40 @@ theme = ExtResource("3_rvwof")
 [node name="Song" type="RichTextLabel" parent="containers/HBoxContainer/PanelContainer3"]
 clip_contents = false
 layout_mode = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_krkpy")
 bbcode_enabled = true
-text = "[center][font_size=18]Current Song : kdss [/font_size][/center]"
+text = "[center][font_size=28]Current Song : kdss [/font_size][/center]"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[node name="PanelContainer4" type="PanelContainer" parent="containers/HBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_2ol2w")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="containers/HBoxContainer/PanelContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="containers/HBoxContainer/PanelContainer4/HBoxContainer2"]
+custom_minimum_size = Vector2(5, 25)
+layout_mode = 2
+size_flags_vertical = 1
+theme = SubResource("Theme_fq88k")
+fill_mode = 3
+show_percentage = false
+
 [node name="TimeFetch" type="Timer" parent="."]
 autostart = true
 
+[node name="JCPrefresh" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [connection signal="timeout" from="TimeFetch" to="." method="_on_time_fetch_timeout"]
+[connection signal="timeout" from="JCPrefresh" to="." method="_on_jc_prefresh_timeout"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

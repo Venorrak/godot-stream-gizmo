@@ -41,12 +41,18 @@ func setContent(content : Dictionary) -> void:
 			newListContainer.add_child(newSlider)
 		"text":
 			var newContainer : PanelContainer = PanelContainer.new()
-			var newLabel : Label = Label.new()
-			newLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			var newPanel : Panel = Panel.new()
+			var newLabel : RichTextLabel = RichTextLabel.new()
 			newLabel.custom_minimum_size = Vector2(130, 0)
+			newLabel.bbcode_enabled = true
+			newLabel.fit_content = true
+			newLabel.scroll_active = false
+			newLabel.autowrap_mode = TextServer.AUTOWRAP_OFF
 			newLabel.text = content["content"]
+			newPanel.custom_minimum_size = Vector2(130, 20)
 			add_child(newContainer)
 			newContainer.add_child(newLabel)
+			newContainer.add_child(newPanel)
 	get_parent().updateSpecs()
 
 
@@ -69,7 +75,8 @@ func _on_child_entered_tree(node: Node) -> void:
 			size *= newScale
 		"PanelContainer":
 			size = get_child(0).get_rect().size
-			if get_child(0).get_child(0).get_child(0).is_class("VideoStreamPlayer"):
+			var videostream = get_child(0).get_child(0).get_child(0)
+			if videostream != null && videostream.is_class("VideoStreamPlayer"):
 				var scaleToTargetWidth : float = maxWidthImage / size.x
 				var scaleToTargetHeight : float = maxHeightImage / size.y
 				var newScale : float = 1

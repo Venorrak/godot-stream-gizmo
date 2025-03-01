@@ -49,6 +49,10 @@ enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
 
 Clickables=""
 
+[gui]
+
+theme/custom_font="res://TepidTerminal.ttf"
+
 [physics]
 
 3d/run_on_separate_thread=true

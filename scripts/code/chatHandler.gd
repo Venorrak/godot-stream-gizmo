@@ -16,7 +16,8 @@ var CommandsRef : Dictionary = {
 	
 	"!image": createMediaRequest,
 	"!livereaction": createLiveReaction,
-	"!emotes": sendEmoteList
+	"!emotes": sendEmoteList,
+	":3": playProdParticles
 }
 
 func _ready() -> void:
@@ -95,3 +96,6 @@ func sendEmoteList(words : PackedStringArray) -> void:
 		"content": str(newList)
 	}
 	SignalBus.sendMessageToBus.emit(data)
+
+func playProdParticles (words : PackedStringArray) -> void:
+	SignalBus.playProdParticles.emit()

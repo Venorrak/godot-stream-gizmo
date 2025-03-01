@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b5j7yw3ufwl0u"]
+[gd_scene load_steps=44 format=3 uid="uid://b5j7yw3ufwl0u"]
 
 [ext_resource type="Script" path="res://scripts/code/scene.gd" id="1_f0oil"]
 [ext_resource type="PackedScene" uid="uid://cgnxjvxji7jls" path="res://scenes/Tv.tscn" id="2_5ybly"]
@@ -6,6 +6,30 @@
 [ext_resource type="PackedScene" uid="uid://bcdudmycu7ark" path="res://scenes/floppy.tscn" id="3_l2rq4"]
 [ext_resource type="PackedScene" uid="uid://c0wrfk63v6nsn" path="res://scenes/taskbar.tscn" id="4_gr3jo"]
 [ext_resource type="PackedScene" uid="uid://m2mfr2fdlldl" path="res://scenes/overlay.tscn" id="5_m8pni"]
+[ext_resource type="Script" path="res://scripts/code/_;3.gd" id="7_7vj38"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8v8bb"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="SystemFont" id="SystemFont_vgnsy"]
+font_names = PackedStringArray("Cursive")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkdgv"]
+transparency = 1
+albedo_color = Color(0.85, 0.68, 0, 0.796078)
+grow_amount = 0.23
+proximity_fade_distance = 0.01
+
+[sub_resource type="TextMesh" id="TextMesh_62it7"]
+material = SubResource("StandardMaterial3D_vkdgv")
+text = ":3"
+font = SubResource("SystemFont_vgnsy")
+pixel_size = 0.05
+depth = 0.2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0yrar"]
 viewport_path = NodePath("displayViewport")
@@ -382,6 +406,17 @@ water = NodePath("displayViewport/WaterWrap")
 [node name="ambiantLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.364877, -0.18403, 0.912687, 0, 0.980271, 0.197657, -0.931056, -0.0721206, 0.357678, 0, 0, 0)
 light_energy = 0.4
+
+[node name="_;3" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+emitting = false
+amount = 15
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_8v8bb")
+draw_pass_1 = SubResource("TextMesh_62it7")
+script = ExtResource("7_7vj38")
 
 [node name="Tv" parent="." instance=ExtResource("2_5ybly")]
 transform = Transform3D(1.845, 0, 0, 0, 1.845, 0, 0, 0, 1.845, 2.555, -3.28, -7.17)

@@ -12,3 +12,4 @@ signal clearOverlayElements
 signal OverlayElementsEnabled #bool
 signal createNewMessageListComponent
 signal sendMessageToBus #Dict
+signal playProdParticles
