@@ -14,13 +14,15 @@ collision_mask = 4
 [node name="Node2D" type="Node2D" parent="." index="1"]
 script = ExtResource("2_5t2b6")
 
-[node name="PanelContainer" type="PanelContainer" parent="Node2D" index="0" node_paths=PackedStringArray("noteContent", "imageLink", "videoLink", "animSelect", "messageList", "httpImage", "httpVideo")]
+[node name="PanelContainer" type="PanelContainer" parent="Node2D" index="0" node_paths=PackedStringArray("noteContent", "imageLink", "videoLink", "animSelect", "sizeXDraw", "sizeYDraw", "messageList", "httpImage", "httpVideo")]
 theme = ExtResource("3_tb0q4")
 script = ExtResource("4_m2u3w")
 noteContent = NodePath("VBoxContainer/TabContainer/pas rien/create/note/TextEdit")
 imageLink = NodePath("VBoxContainer/TabContainer/pas rien/create/image/imageLink")
 videoLink = NodePath("VBoxContainer/TabContainer/pas rien/create/Video/videoLink")
 animSelect = NodePath("VBoxContainer/TabContainer/pas rien/anim")
+sizeXDraw = NodePath("VBoxContainer/TabContainer/pas rien/create/draw/sizeX")
+sizeYDraw = NodePath("VBoxContainer/TabContainer/pas rien/create/draw/sizeY")
 messageList = NodePath("VBoxContainer/TabContainer/pas rien/messages/messages")
 contentWindowScene = ExtResource("5_uwxqw")
 httpImage = NodePath("imageRequest")
@@ -45,7 +47,7 @@ metadata/_tab_index = 0
 
 [node name="pas rien" type="TabContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer" index="2"]
 layout_mode = 2
-current_tab = 2
+current_tab = 1
 clip_tabs = false
 metadata/_tab_index = 1
 
@@ -66,7 +68,6 @@ popup/item_3/id = 3
 metadata/_tab_index = 0
 
 [node name="create" type="VBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien" index="2"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -116,7 +117,32 @@ layout_mode = 2
 button_mask = 3
 text = "send"
 
+[node name="draw" type="HBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create" index="3"]
+layout_mode = 2
+
+[node name="sizeX" type="SpinBox" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/draw" index="0"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+min_value = 130.0
+max_value = 720.0
+value = 130.0
+suffix = "px"
+
+[node name="sizeY" type="SpinBox" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/draw" index="1"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+min_value = 20.0
+max_value = 480.0
+value = 20.0
+suffix = "px"
+
+[node name="drawButton" type="Button" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/draw" index="2"]
+layout_mode = 2
+button_mask = 3
+text = "send new draw"
+
 [node name="options" type="VBoxContainer" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien" index="3"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -170,6 +196,7 @@ timeout = 10.0
 [connection signal="pressed" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/image/imageButton" to="Node2D/PanelContainer" method="_on_image_button_pressed"]
 [connection signal="pressed" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/Video/video" to="Node2D/PanelContainer" method="_on_video_pressed"]
 [connection signal="pressed" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/note/noteButton" to="Node2D/PanelContainer" method="_on_note_button_pressed"]
+[connection signal="button_up" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/draw/drawButton" to="Node2D/PanelContainer" method="_on_draw_button_button_up"]
 [connection signal="pressed" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options/clearWindows" to="Node2D/PanelContainer" method="_on_clear_windows_pressed"]
 [connection signal="toggled" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options/windowEnable" to="Node2D/PanelContainer" method="_on_window_enable_toggled"]
 [connection signal="toggled" from="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/options/JoelEmoteEnable" to="Node2D/PanelContainer" method="_on_joel_emote_enable_toggled"]

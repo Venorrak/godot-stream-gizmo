@@ -3,6 +3,7 @@ var size : Vector2 = Vector2.ZERO
 
 @export var maxWidthImage : int
 @export var maxHeightImage : int
+@export var drawingBoardScene : PackedScene
 
 var currentVideoPlayer : VideoStreamPlayer
 
@@ -41,7 +42,7 @@ func setContent(content : Dictionary) -> void:
 			newListContainer.add_child(newSlider)
 		"text":
 			var newContainer : PanelContainer = PanelContainer.new()
-			var newPanel : Panel = Panel.new()
+			newContainer.connect("resized", panelSizeUpdated)
 			var newLabel : RichTextLabel = RichTextLabel.new()
 			newLabel.custom_minimum_size = Vector2(130, 0)
 			newLabel.bbcode_enabled = true
@@ -49,10 +50,12 @@ func setContent(content : Dictionary) -> void:
 			newLabel.scroll_active = false
 			newLabel.autowrap_mode = TextServer.AUTOWRAP_OFF
 			newLabel.text = content["content"]
-			newPanel.custom_minimum_size = Vector2(130, 20)
 			add_child(newContainer)
 			newContainer.add_child(newLabel)
-			newContainer.add_child(newPanel)
+		"draw":
+			var newDrawing = drawingBoardScene.instantiate()
+			newDrawing.setPanelSize(content["content"])
+			add_child(newDrawing)
 	get_parent().updateSpecs()
 
 
@@ -74,7 +77,7 @@ func _on_child_entered_tree(node: Node) -> void:
 			get_child(0).position += (size * newScale)/2
 			size *= newScale
 		"PanelContainer":
-			size = get_child(0).get_rect().size
+			size = get_child(0).size
 			var videostream = get_child(0).get_child(0).get_child(0)
 			if videostream != null && videostream.is_class("VideoStreamPlayer"):
 				var scaleToTargetWidth : float = maxWidthImage / size.x
@@ -86,6 +89,10 @@ func _on_child_entered_tree(node: Node) -> void:
 					newScale = scaleToTargetHeight
 				get_child(0).scale = Vector2(newScale, newScale)
 				size *= newScale
+	get_parent().updateSpecs()
+
+func panelSizeUpdated() -> void:
+	size = get_child(0).size
 	get_parent().updateSpecs()
 
 func volumeChanged(newVolume : float) -> void:

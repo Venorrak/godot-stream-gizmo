@@ -4,6 +4,9 @@ extends PanelContainer
 @export var imageLink : LineEdit
 @export var videoLink : LineEdit
 @export var animSelect : OptionButton
+@export var sizeXDraw : SpinBox
+@export var sizeYDraw : SpinBox
+
 @export var messageList : VBoxContainer
 @export var contentWindowScene : PackedScene
 @export var httpImage : HTTPRequest
@@ -91,3 +94,13 @@ func _on_minimum_size_changed() -> void:
 func _on_video_pressed() -> void:
 	if videoLink.text.is_empty(): return
 	httpVideo.request(videoLink.text)
+
+func _on_draw_button_button_up() -> void:
+	var newDraw = contentWindowScene.instantiate()
+	newDraw.setContent(
+		{
+			"type": "draw",
+			"content": Vector2(sizeXDraw.value, sizeYDraw.value)
+		}
+	)
+	SignalBus.createOverlayElement.emit(newDraw, true, Vector2(0, 0))

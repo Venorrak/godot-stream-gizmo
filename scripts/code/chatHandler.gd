@@ -56,6 +56,11 @@ func treatCommands(data : Dictionary) -> bool:
 			return true
 	return false
 
+func randomPositionInWindow() -> Vector2:
+	var rand_x : float = randf_range(0.0, 750.0)
+	var rand_y : float = randf_range(0.0, 600.0)
+	return Vector2(rand_x, rand_y)
+
 func createLiveReaction(words : PackedStringArray) -> void:
 	var newLiveReact = liveReaction.instantiate()
 	SignalBus.createOverlayElement.emit(newLiveReact)
@@ -65,11 +70,6 @@ func createMediaRequest(words : PackedStringArray) -> void:
 		var newMediaRequest = mediaRequestScene.instantiate()
 		newMediaRequest.setUrl(words[1])
 		SignalBus.createNewMessageListComponent.emit(newMediaRequest)
-
-func randomPositionInWindow() -> Vector2:
-	var rand_x : float = randf_range(0.0, 750.0)
-	var rand_y : float = randf_range(0.0, 600.0)
-	return Vector2(rand_x, rand_y)
 
 func sendCommandsToChat(words : PackedStringArray) -> void:
 	var data : Dictionary = {

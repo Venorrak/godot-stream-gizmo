@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://2pdue4yw41do"]
+[gd_scene load_steps=5 format=3 uid="uid://2pdue4yw41do"]
 
 [ext_resource type="PackedScene" uid="uid://bqhmt6k7s7i06" path="res://scenes/window_object_wrapper.tscn" id="1_t8ubp"]
 [ext_resource type="Script" path="res://scripts/code/get_window_specs.gd" id="2_d8tnk"]
 [ext_resource type="Script" path="res://scripts/code/basic_content_window.gd" id="3_uvasf"]
+[ext_resource type="PackedScene" uid="uid://dosdy5hesa681" path="res://scenes/drawingBoard.tscn" id="4_2ph32"]
 
 [node name="RigidBody2D" node_paths=PackedStringArray("contentRef") instance=ExtResource("1_t8ubp")]
 collision_layer = 2
@@ -16,5 +17,6 @@ script = ExtResource("2_d8tnk")
 script = ExtResource("3_uvasf")
 maxWidthImage = 720
 maxHeightImage = 480
+drawingBoardScene = ExtResource("4_2ph32")
 
 [connection signal="child_entered_tree" from="Node2D/Node2D" to="Node2D/Node2D" method="_on_child_entered_tree"]

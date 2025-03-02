@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://dosdy5hesa681"]
+
+[ext_resource type="Script" path="res://scripts/code/drawingBoard.gd" id="1_4gklp"]
+
+[node name="drawingBoard" type="PanelContainer" node_paths=PackedStringArray("paintingPanel", "menuBar", "colorPicker")]
+offset_bottom = 4.0
+script = ExtResource("1_4gklp")
+paintingPanel = NodePath("VBoxContainer/Panel")
+menuBar = NodePath("VBoxContainer/HBoxContainer")
+colorPicker = NodePath("VBoxContainer/HBoxContainer/ColorPickerButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="undoButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_mask = 3
+text = "undo"
+
+[node name="clearButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_mask = 3
+text = "clear"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_mask = 3
+text = "color"
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/undoButton" to="." method="_on_undo_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/clearButton" to="." method="_on_clear_button_button_up"]
+[connection signal="color_changed" from="VBoxContainer/HBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="picker_created" from="VBoxContainer/HBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_picker_created"]
