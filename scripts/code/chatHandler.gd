@@ -26,7 +26,6 @@ func _ready() -> void:
 func wsMessage(message : Dictionary) -> void:
 	if message["to"] == "chat":
 		var payload : Dictionary = message["payload"]
-		print(payload)
 		if treatCommands(payload): return
 		payload["id"] = index
 		index += 1

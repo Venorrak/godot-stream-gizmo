@@ -73,9 +73,12 @@ func _on_child_entered_tree(node: Node) -> void:
 				newScale = scaleToTargetWidth
 			else:
 				newScale = scaleToTargetHeight
-			get_child(0).scale = Vector2(newScale, newScale)
-			get_child(0).position += (size * newScale)/2
-			size *= newScale
+			if newScale < 1:
+				get_child(0).scale = Vector2(newScale, newScale)
+				get_child(0).position += (size * newScale)/2
+				size *= newScale
+			else:
+				get_child(0).position += size / 2
 		"PanelContainer":
 			size = get_child(0).size
 			var videostream = get_child(0).get_child(0).get_child(0)
@@ -87,8 +90,9 @@ func _on_child_entered_tree(node: Node) -> void:
 					newScale = scaleToTargetWidth
 				else:
 					newScale = scaleToTargetHeight
-				get_child(0).scale = Vector2(newScale, newScale)
-				size *= newScale
+				if newScale < 1:
+					get_child(0).scale = Vector2(newScale, newScale)
+					size *= newScale
 	get_parent().updateSpecs()
 
 func panelSizeUpdated() -> void:

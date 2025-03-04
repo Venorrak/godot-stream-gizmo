@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 		while server.get_available_packet_count():
 			var pkt = server.get_packet()
 			var data = json.parse_string(str(pkt.get_string_from_utf8()))
+			Loggie.debug(data)
 			SignalBus.websocketMessage.emit(data)
 	elif state == WebSocketPeer.STATE_CLOSED:
 		var code = server.get_close_code()

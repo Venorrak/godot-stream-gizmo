@@ -137,7 +137,6 @@ func setMessageLabelContent() -> void:
 			"emote":
 				var emoteUrl : String = "https://static-cdn.jtvnw.net/emoticons/v2/" + message[i]["id"] + "/static/light/1.0"
 				messageLabel.add_image(registeredImages[emoteUrl], 40, 40, Color(1, 1, 1, 1))
-				SignalBus.createJoel.emit(1, registeredImages[emoteUrl])
 			"text":
 				messageLabel.append_text("[color=" + str(Color.WHITE.lerp(Color.GREEN, lore).to_html(false)) + "][font_size=" + str(19) + "]")
 				for part in message[i]["content"]:
@@ -145,7 +144,6 @@ func setMessageLabelContent() -> void:
 						messageLabel.append_text(part + " ")
 					else:
 						messageLabel.add_image(part, 40, 40, Color(1, 1, 1, 1))
-						SignalBus.createJoel.emit(1, part)
 
 func _on_glow_timeout():
 	glowState = !glowState

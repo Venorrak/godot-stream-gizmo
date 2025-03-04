@@ -8,6 +8,12 @@
 
 config_version=5
 
+[addons]
+
+script_name_on_top/hide_scripts_panel=false
+script_name_on_top/hide_bottom_bar=false
+script_name_on_top/show_bottom_bar_on_warning=true
+
 [application]
 
 config/name="avatar"
@@ -29,6 +35,7 @@ SignalBus="*res://scripts/code/SignalBus.gd"
 AudioManager="*res://scenes/AudioManager.tscn"
 StreamBus="*res://scripts/code/StreamBus.gd"
 ChatHandler="*res://scenes/chatHandler.tscn"
+Loggie="*res://addons/loggie/loggie.gd"
 
 [display]
 
@@ -43,7 +50,7 @@ window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
+enabled=PackedStringArray("res://addons/loggie/plugin.cfg", "res://addons/script-name-on-top/plugin.cfg", "res://addons/sprite_mesh/plugin.cfg")
 
 [global_group]
 
@@ -52,6 +59,10 @@ Clickables=""
 [gui]
 
 theme/custom_font="res://TepidTerminal.ttf"
+
+[loggie]
+
+general/log_level=4
 
 [physics]
 

@@ -121,7 +121,7 @@ text = "send"
 layout_mode = 2
 
 [node name="sizeX" type="SpinBox" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/draw" index="0"]
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 min_value = 130.0
 max_value = 720.0
@@ -129,7 +129,7 @@ value = 130.0
 suffix = "px"
 
 [node name="sizeY" type="SpinBox" parent="Node2D/PanelContainer/VBoxContainer/TabContainer/pas rien/create/draw" index="1"]
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 min_value = 20.0
 max_value = 480.0

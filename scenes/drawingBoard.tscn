@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dosdy5hesa681"]
+[gd_scene load_steps=4 format=3 uid="uid://dosdy5hesa681"]
 
 [ext_resource type="Script" path="res://scripts/code/drawingBoard.gd" id="1_4gklp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7igtw"]
+bg_color = Color(0.13, 0.13, 0.13, 0.490196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yipt7"]
+bg_color = Color(0.13, 0.13, 0.13, 0)
+
 [node name="drawingBoard" type="PanelContainer" node_paths=PackedStringArray("paintingPanel", "menuBar", "colorPicker")]
 offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7igtw")
 script = ExtResource("1_4gklp")
 paintingPanel = NodePath("VBoxContainer/Panel")
 menuBar = NodePath("VBoxContainer/HBoxContainer")
@@ -33,6 +40,7 @@ text = "color"
 [node name="Panel" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yipt7")
 
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/undoButton" to="." method="_on_undo_button_button_up"]
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/clearButton" to="." method="_on_clear_button_button_up"]
